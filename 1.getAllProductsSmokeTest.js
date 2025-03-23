@@ -13,7 +13,7 @@ export const options = {
 let httpError = new Counter('errorCounter')
 
 export default function () {
-    const baseUrl = 'https://fakestoreapi.com/';
+    const baseUrl = 'https://api.escuelajs.co/api/v1/';
     let resProduct = http.get(`${baseUrl}products`);
     
     if(resProduct.error) {
