@@ -1,9 +1,8 @@
 import http from 'k6/http'
-import createNewProduct from './2.createNewProductSmokeTest';
-import {check, sleep} from 'k6'
-import { Counter } from 'k6/metrics'
+import createProduct from './2.createNewProductSmokeTest.js';
+import {check, sleep} from 'k6';
+import { Counter } from 'k6/metrics';
 import { randomIntBetween} from 'https://jslib.k6.io/k6-utils/1.2.0/index.js';
-import { SharedArray } from 'k6/data';
 
 export const options = {
     vus:1,
@@ -28,18 +27,19 @@ export const options = {
 
 let httpError = new Counter('errorCounter')
 
-const productDataArray = new SharedArray('product information', function () {
-    return JSON.parse(open('./fixture/product.json')).products;
-});
-export default function () {
+
+export default function getProductID () {
     const baseUrl = 'https://api.escuelajs.co/api/v1/';
-    let newProductId = createNewProduct ();
+    let createProductResponse = createProduct ();
+    let newProductId = createProductResponse.productId;
     
     let resGetProductById = http.get(`${baseUrl}products/` + newProductId, {
         tags: {
             product: 'productId'
         }
     });
+
+    sleep(randomIntBetween(1,5))
 
     if(resGetProductById.error){
         httpError.add(1, {product: 'productId'}),
@@ -57,5 +57,5 @@ export default function () {
         }
         
     
-        sleep(randomIntBetween(1,5))
+        
 }

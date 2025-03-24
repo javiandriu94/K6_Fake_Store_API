@@ -14,7 +14,7 @@ let httpError = new Counter('errorCounter')
 const productDataArray = new SharedArray('product information', function () {
     return JSON.parse(open('./fixture/product.json')).products;
 });
-export default function createNewProduct() {
+export default function createProduct() {
     const baseUrl = 'https://api.escuelajs.co/api/v1/';
     let product = { ...productDataArray[0] };
     let newName = randomString(10)
@@ -47,7 +47,7 @@ export default function createNewProduct() {
             
         }else {
             check(resCreateNewProduct, {
-                'isStatus200': r => r.status === 201,
+                'isStatus201': r => r.status === 201,
                 'isIdAnInteger': r => typeof r.json().id === 'number',
                 'isTitleAString': r => typeof r.json().title === 'string',
                 'isPriceAnInteger': r => typeof r.json().price === 'number',
@@ -79,12 +79,12 @@ export default function createNewProduct() {
         sleep(randomIntBetween(1,5)) 
 
         if (resCreateNewProduct.status === 201) {
-            return newProductId;
+            return {
+                productId: newProductId,
+                requestBody: product
+            }
         } else {
             return null;
-        }
-        
-        
-        
+        }  
           
 }
