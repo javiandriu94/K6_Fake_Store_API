@@ -37,8 +37,7 @@ export default function updateProductData() {
         }
         let resUpdateProductId = http.put(`${baseUrl}products/${newProductId}`, payload, params);
         let productUpdatedID = resUpdateProductId.json().id
-        console.log(resUpdateProductId.body)
-        
+        sleep(randomIntBetween(1,5)) 
 
         if(resUpdateProductId.error){
             httpError.add(1, {product: 'update'}),
@@ -59,7 +58,7 @@ export default function updateProductData() {
             )
         }
     
-        sleep(randomIntBetween(1,5)) 
+        
 
         let resGetProductUpdatedInTheList = http.get(`${baseUrl}products`, {
                 tags: {
@@ -69,6 +68,7 @@ export default function updateProductData() {
             });
 
             sleep(randomIntBetween(1,5))  
+            
             if(resGetProductUpdatedInTheList.error) {
                 httpError.add(1);
                 check(resGetProductUpdatedInTheList,{
