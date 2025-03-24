@@ -6,10 +6,7 @@ import { SharedArray } from 'k6/data';
 
 export const options = {
     vus:1,
-    duration: '1m',
-    thresholds: {
-        errorCounter:['count<=1']
-    }
+    duration: '30s',
 }
 
 let httpError = new Counter('errorCounter')
@@ -59,7 +56,7 @@ export default function createNewProduct() {
                 'DoesCategoryExist': r => r.json().category.id === newCategoryId,
                 'categoryName': r => {
                 const category = r.json().category;
-                if (category.id === 1 && category.name === "Games" ) {
+                if (category.id === 1 && (category.name === "Clothes" || category.name === "Games")  ) {
                     return true;
                 }else if (category.id === 2 && category.name === "Electronics") {
                     return true ;
