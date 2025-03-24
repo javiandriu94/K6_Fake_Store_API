@@ -1,9 +1,9 @@
 {
     "products": [
         {
-            "title": "Vibrant Pink Classic Sneakers",
+            "title": "",
             "price": 55,
-            "description": "Step into style with our Vibrant Pink Classic Sneakers! These eye-catching shoes feature a bold pink hue with iconic white detailing, offering a sleek, timeless design. Constructed with durable materials and a comfortable fit, they are perfect for those seeking a pop of color in their everyday footwear. Grab a pair today and add some vibrancy to your step!",
+            "description": "Step into style with our Vibrant Pink Classic Sneakers!",
             "categoryId": 1,
             "images": ["https://placehold.co/600x400"]
         }
